@@ -851,12 +851,15 @@ float DynamicFont::get_underline_thickness() const {
 
 Size2 DynamicFont::get_char_size(CharType p_char, CharType p_next) const {
 
+	const int tabbing_space = 4 * spacing_space;
 	if (!data_at_size.is_valid())
 		return Size2(1, 1);
 
 	Size2 ret = data_at_size->get_char_size(p_char, p_next, fallback_data_at_size);
 	if (p_char == ' ')
 		ret.width += spacing_space + spacing_char;
+	else if(p_char == '\t')
+		ret.width += tabbing_space + spacing_char;
 	else if (p_next)
 		ret.width += spacing_char;
 

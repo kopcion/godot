@@ -108,11 +108,14 @@ Node *NavigationObstacle2D::get_navigation_node() const {
 }
 
 String NavigationObstacle2D::get_configuration_warning() const {
+	String warning = Node::get_configuration_warning();
+
 	if (!Object::cast_to<Node2D>(get_parent())) {
-		return TTR("The NavigationObstacle2D only serves to provide collision avoidance to a Node2D object.");
+		warning += ((warning == String()) ? "" : "\n\n") + TTR("The NavigationObstacle2D only serves to provide collision avoidance to a Node2D object.");
+//		return TTR("The NavigationObstacle2D only serves to provide collision avoidance to a Node2D object.");
 	}
 
-	return String();
+	return warning;
 }
 
 void NavigationObstacle2D::update_agent_shape() {
